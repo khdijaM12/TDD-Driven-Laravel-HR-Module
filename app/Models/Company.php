@@ -16,4 +16,9 @@ class Company extends Model
         'website',
         'status',
     ];
+
+        public function jobs()
+    {
+        return $this->hasMany(CompanyJob::class);
+    }
 }

@@ -24,4 +24,13 @@ class CompanyBranch extends Model
         {
             return $this->hasMany(CompanyHoliday::class, 'branch_id');
         }
+
+        public static function getOptionsByCompanyId(?int $companyId)
+        {
+        if (!$companyId) {
+            return collect(); 
+        }
+
+        return self::where('company_id', $companyId)->pluck('name_en', 'id');
+        }
 }

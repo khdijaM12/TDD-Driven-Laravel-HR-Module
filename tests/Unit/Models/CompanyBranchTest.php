@@ -10,10 +10,12 @@ use App\Models\CompanyBranch;
 
 class CompanyBranchTest extends TestCase
 {
+
     use RefreshDatabase;
 
     public function test_fillable_properties()
     {
+
         $branch = new CompanyBranch();
 
         $expected = ['company_id', 'name_en', 'name_ar'];

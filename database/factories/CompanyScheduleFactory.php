@@ -20,7 +20,7 @@ class CompanyScheduleFactory extends Factory
         return [
             'company_id' => Company::factory(),
             'slug' => $this->faker->unique()->slug,
-            'weekend_days' => json_encode(['friday']),
+            'weekend_days' => json_encode([$this->faker->randomElement(['Friday', 'Saturday', 'Sunday'])]),
             'check_in_time' => '08:00:00',
             'check_out_time' => '17:00:00',
         ];

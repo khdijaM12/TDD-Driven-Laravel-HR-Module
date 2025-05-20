@@ -17,12 +17,15 @@ class CompanyHolidayFactory extends Factory
      */
     public function definition()
     {
+        $dateFrom = $this->faker->date();
+        $dateTo = $this->faker->dateTimeBetween($dateFrom, '+10 days')->format('Y-m-d');
+
         return [
             'company_id' => Company::factory(),
             'branch_id' => CompanyBranch::factory(),
             'occasion' => $this->faker->word,
-            'date_from' => $this->faker->date(),
-            'date_to' => $this->faker->date(),
+            'date_from' => $dateFrom,
+            'date_to' => $dateTo,
         ];
     }
 }

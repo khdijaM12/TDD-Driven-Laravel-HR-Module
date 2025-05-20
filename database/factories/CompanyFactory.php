@@ -15,13 +15,13 @@ class CompanyFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    {
-        return [
-            'name_en' => $this->faker->company,
-            'name_ar' => $this->faker->company,
-            'logo' => null,
-            'website' => $this->faker->url,
-            'status' => 'active',
-        ];
-    }
+{
+    return [
+        'name_en' => $this->faker->unique()->company,
+        'name_ar' => 'شركة اختبار',
+        'logo' => null,
+        'website' => $this->faker->url,
+        'status' => $this->faker->randomElement(['active', 'inactive']),
+    ];
+}
 }

@@ -20,6 +20,10 @@ class CompanySchedule extends Model
         'check_out_time'
         ];
 
+        protected $casts = [
+        'weekend_days' => 'array',
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -29,7 +33,11 @@ class CompanySchedule extends Model
     {
         static::saving(function ($schedule) {
             $rules = [
+                'company_id' => 'required|exists:companies,id',
                 'slug' => 'required|unique:company_schedules,slug,' . $schedule->id,
+                'weekend_days' => 'required|array',
+                'check_in_time' => 'required|date_format:H:i',
+                'check_out_time' => 'required|date_format:H:i|after:check_in_time',
             ];
 
             $validator = Validator::make($schedule->attributesToArray(), $rules);

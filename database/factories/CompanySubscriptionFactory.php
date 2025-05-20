@@ -17,11 +17,15 @@ class CompanySubscriptionFactory extends Factory
      */
     public function definition()
     {
+        $start = $this->faker->dateTimeBetween('-1 month', 'now');
+        $end = (clone $start)->modify('+1 month');
+
         return [
             'company_id' => Company::factory(),
-            'subscribe_start' => $this->faker->date(),
-            'subscribe_end' => $this->faker->date(),
+            'subscribe_start' => $start,
+            'subscribe_end' => $end,
             'number_employees' => $this->faker->numberBetween(1, 100),
         ];
     }
+
 }

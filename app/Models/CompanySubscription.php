@@ -18,19 +18,24 @@ class CompanySubscription extends Model
         'number_employees'
         ];
 
+    protected $casts = [
+        'subscribe_start' => 'date',
+        'subscribe_end' => 'date',
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
 
-   protected static function booted()
-{
-    static::saving(function ($subscription) {
-        Validator::make($subscription->toArray(), [
-            'subscribe_start' => 'required|date',
-            'subscribe_end' => 'required|date|after:subscribe_start',
-        ])->validate();
-    });
-}
+    protected static function booted()
+    {
+        static::saving(function ($subscription) {
+            Validator::make($subscription->toArray(), [
+                'subscribe_start' => 'required|date',
+                'subscribe_end' => 'required|date|after:subscribe_start',
+            ])->validate();
+        });
+    }
 
 }

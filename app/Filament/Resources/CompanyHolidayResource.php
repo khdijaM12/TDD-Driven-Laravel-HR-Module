@@ -26,7 +26,7 @@ class CompanyHolidayResource extends Resource
 {
     protected static ?string $model = CompanyHoliday::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-sun';
 
     protected static ?string $navigationLabel = 'Company Holidays';
 

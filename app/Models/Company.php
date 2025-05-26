@@ -10,11 +10,14 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name_en',
-        'name_ar',
+        'name',
         'logo',
         'website',
         'status',
+    ];
+
+    protected $casts = [
+    'name' => 'array',
     ];
 
         public function jobs()

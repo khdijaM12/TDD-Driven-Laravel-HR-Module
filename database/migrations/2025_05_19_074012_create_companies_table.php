@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name_en');
-            $table->string('name_ar');
+            $table->json('name')->nullable();
             $table->string('logo')->nullable();
             $table->string('website')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

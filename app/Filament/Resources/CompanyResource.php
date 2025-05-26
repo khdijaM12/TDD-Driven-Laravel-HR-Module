@@ -20,6 +20,8 @@ use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\Grid;
+use App\Rules\EnglishArabicName;
 
 class CompanyResource extends Resource
 {
@@ -30,17 +32,13 @@ class CompanyResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-                ->schema([
-                TextInput::make('name_en')
-                    ->label('English Name')
+            ->schema([
+                TextInput::make('full_name')
+                    ->label('Company Name (English / Arabic)')
+                    ->helperText('Example: yemen mobile / يمن موبايل')
                     ->required()
-                    ->rules(['required', 'string', 'max:255']),
-
-                TextInput::make('name_ar')
-                    ->label('Arabic Name')
-                    ->required()
-                    ->rules(['required', 'string', 'max:255']),
-
+                    ->rules([new EnglishArabicName()])
+                    ->default(fn ($record) => $record?->name['en'] . ' / ' . $record?->name['ar']),
                 FileUpload::make('logo')
                     ->label('Logo')
                     ->directory('company-logos')
@@ -63,13 +61,14 @@ class CompanyResource extends Resource
             ]);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('name_en')->label('Name (EN)')->searchable(),
-                TextColumn::make('name_ar')->label('Name (AR)')->searchable(),
+                TextColumn::make('name.en')->label('Name (EN)')->searchable(),
+                TextColumn::make('name.ar')->label('Name (AR)')->searchable(),
                 ImageColumn::make('logo')->label('Logo'),
                 TextColumn::make('website')
                     ->label('Website')

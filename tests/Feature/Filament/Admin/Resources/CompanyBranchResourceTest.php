@@ -1,6 +1,9 @@
 <?php
 
 use App\Filament\Resources\CompanyBranchResource;
+use \App\Filament\Resources\CompanyBranchResource\Pages\EditCompanyBranch;
+use \App\Filament\Resources\CompanyBranchResource\Pages\ListCompanyBranches;
+use \App\Filament\Resources\CompanyBranchResource\Pages\CreateCompanyBranch;
 use App\Models\Company;
 use App\Models\CompanyBranch;
 use Illuminate\Foundation\Testing\RefreshDatabase;

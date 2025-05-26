@@ -1,6 +1,9 @@
 <?php
 
 use App\Filament\Resources\CompanyDepartmentResource;
+use \App\Filament\Resources\CompanyDepartmentResource\Pages\EditCompanyDepartment;
+use \App\Filament\Resources\CompanyDepartmentResource\Pages\ListCompanyDepartments;
+use \App\Filament\Resources\CompanyDepartmentResource\Pages\CreateCompanyDepartment;
 use App\Models\Company;
 use App\Models\CompanyDepartment;
 use function Pest\Livewire\livewire;

@@ -1,6 +1,9 @@
 <?php
 
 use App\Filament\Resources\CompanyHolidayResource;
+use \App\Filament\Resources\CompanyHolidayResource\Pages\EditCompanyHoliday;
+use \App\Filament\Resources\CompanyHolidayResource\Pages\ListCompanyHolidays;
+use \App\Filament\Resources\CompanyHolidayResource\Pages\CreateCompanyHoliday;
 use App\Models\CompanyHoliday;
 use App\Models\Company;
 use App\Models\CompanyBranch;

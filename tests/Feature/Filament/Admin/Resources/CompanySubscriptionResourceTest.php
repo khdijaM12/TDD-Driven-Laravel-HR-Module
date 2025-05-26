@@ -1,6 +1,9 @@
 <?php
 
 use App\Filament\Resources\CompanySubscriptionResource;
+use \App\Filament\Resources\CompanySubscriptionResource\Pages\EditCompanySubscription;
+use \App\Filament\Resources\CompanySubscriptionResource\Pages\ListCompanySubscriptions;
+use \App\Filament\Resources\CompanySubscriptionResource\Pages\CreateCompanySubscription;
 use App\Models\Company;
 use App\Models\CompanySubscription;
 use function Pest\Livewire\livewire;

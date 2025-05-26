@@ -1,6 +1,7 @@
 <?php
 
 use App\Filament\Resources\CompanyScheduleResource;
+use \App\Filament\Resources\CompanyScheduleResource\Pages\CreateCompanySchedule;
 use App\Models\Company;
 use App\Models\CompanySchedule;
 use function Pest\Livewire\livewire;

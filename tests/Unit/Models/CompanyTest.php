@@ -1,30 +1,22 @@
 <?php
 
-namespace Tests\Unit\Models;
-
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Tests\TestCase;
 use App\Models\Company;
 use App\Models\CompanyJob;
 
-class CompanyTest extends TestCase
-{
-    use RefreshDatabase;
 
-    public function test_fillable_properties()
-    {
-        $company = new Company();
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
-        $expected = ['name_en', 'name_ar', 'logo', 'website', 'status'];
+test('fillable properties', function () {
+    $company = new Company();
 
-        $this->assertEquals($expected, $company->getFillable());
-    }
+    $expected = ['name_en', 'name_ar', 'logo', 'website', 'status'];
 
-    public function test_company_has_many_jobs_relationship()
-    {
-        $company = new Company();
+    expect($company->getFillable())->toEqual($expected);
+});
 
-        $this->assertInstanceOf(HasMany::class, $company->jobs());
-    }
-}
+test('company has many jobs relationship', function () {
+    $company = new Company();
+
+    expect($company->jobs())->toBeInstanceOf(HasMany::class);
+});

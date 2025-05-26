@@ -1,33 +1,21 @@
 <?php
 
-namespace Tests\Unit\Database;
-
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use Tests\TestCase;
 
-class CompanySchedulesMigrationTest extends TestCase
-{
-    use RefreshDatabase;
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
-    public function test_company_schedules_table_has_expected_columns()
-    {
-        $this->assertTrue(Schema::hasTable('company_schedules'));
+test('company schedules table has expected columns', function () {
+    expect(Schema::hasTable('company_schedules'))->toBeTrue();
 
-        foreach(['id', 'company_id', 'slug', 'weekend_days', 'check_in_time', 'check_out_time', 'created_at', 'updated_at'] as $column){
-            $this->assertTrue(
-                Schema::hasColumn('company_schedules', $column),
-                "Missing column: $column"
-            );
-        }
+    foreach(['id', 'company_id', 'slug', 'weekend_days', 'check_in_time', 'check_out_time', 'created_at', 'updated_at'] as $column){
+        expect(Schema::hasColumn('company_schedules', $column))->toBeTrue("Missing column: $column");
     }
+});
 
-    public function test_company_schedules_table_has_foreign_key()
-    {
-        $foreignKeys = DB::select("SELECT * FROM information_schema.KEY_COLUMN_USAGE 
+test('company schedules table has foreign key', function () {
+    $foreignKeys = DB::select("SELECT * FROM information_schema.KEY_COLUMN_USAGE 
         WHERE TABLE_NAME = 'company_schedules' AND COLUMN_NAME = 'company_id' AND REFERENCED_TABLE_NAME = 'companies'");
 
-    $this->assertNotEmpty($foreignKeys, "company_id should reference companies.id");
-    }
-}
+    expect($foreignKeys)->not->toBeEmpty("company_id should reference companies.id");
+});

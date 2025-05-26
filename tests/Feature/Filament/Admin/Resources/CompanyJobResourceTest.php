@@ -1,6 +1,9 @@
 <?php
 
 use App\Filament\Resources\CompanyJobResource;
+use \App\Filament\Resources\CompanyJobResource\Pages\EditCompanyJob;
+use \App\Filament\Resources\CompanyJobResource\Pages\ListCompanyJobs;
+use \App\Filament\Resources\CompanyJobResource\Pages\CreateCompanyJob;
 use App\Models\Company;
 use App\Models\CompanyJob;
 use function Pest\Livewire\livewire;

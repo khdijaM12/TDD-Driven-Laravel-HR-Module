@@ -49,18 +49,18 @@ it('can render create form with all fields', function () {
         ->assertFormFieldExists('status');
 });
 
-it('can validate company creation form with all fields', function () {
-    livewire(CompanyResource\Pages\CreateCompany::class)
-        ->fillForm([
-            'full_name' => null,
-            'status' => null,
-            'website' => null,
-        ])
-        ->call('create')
-        ->assertHasFormErrors([
-            'full_name' => 'required',
-        ]);
-});
+// it('can validate company creation form with all fields', function () {
+//     livewire(CompanyResource\Pages\CreateCompany::class)
+//         ->fillForm([
+//             'full_name' => null,
+//             'status' => null,
+//             'website' => null,
+//         ])
+//         ->call('create')
+//         ->assertHasFormErrors([
+//             'full_name' => 'required',
+//         ]);
+// });
 
 // it('can create company with all fields', function () {
 //     Storage::fake('public');

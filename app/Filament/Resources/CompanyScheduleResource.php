@@ -71,7 +71,7 @@ class CompanyScheduleResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('company.name_en')->label('Company (EN)')->searchable(),
+                TextColumn::make('company.name_en')->label('Company (EN)'),
                 TextColumn::make('slug')->label('Slug')->sortable(),
                 TextColumn::make('weekend_days')
                     ->label('Weekend Days')

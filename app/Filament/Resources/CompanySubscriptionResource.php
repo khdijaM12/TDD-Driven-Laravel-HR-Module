@@ -57,7 +57,7 @@ class CompanySubscriptionResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('company.name_en')->label('Company (EN)')->searchable(),
+                TextColumn::make('company.name_en')->label('Company (EN)'),
                 TextColumn::make('subscribe_start')->label('Start Date')->date(),
                 TextColumn::make('subscribe_end')->label('End Date')->date(),
                 TextColumn::make('number_employees')->label('Number of Employees')->sortable(),

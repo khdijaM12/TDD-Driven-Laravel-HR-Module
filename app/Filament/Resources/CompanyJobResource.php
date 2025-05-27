@@ -31,8 +31,12 @@ class CompanyJobResource extends Resource
             ->schema([
                 Select::make('company_id')
                     ->label('Company')
-                    ->relationship('company', 'name_en') 
+                    ->options(
+                        Company::all()->pluck('name_en', 'id')->toArray()
+                    )
+                    ->searchable()
                     ->required(),
+
 
                 TextInput::make('name_en')
                     ->label('Job Title (EN)')
@@ -51,7 +55,7 @@ class CompanyJobResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('company.name_en')->label('Company'), // عرض اسم الشركة المرتبطة
+                TextColumn::make('company.name_en')->label('Company'),
                 TextColumn::make('name_en')->label('Job Title (EN)')->searchable(),
                 TextColumn::make('name_ar')->label('Job Title (AR)')->searchable(),
                 TextColumn::make('created_at')->label('Created At')->dateTime(),

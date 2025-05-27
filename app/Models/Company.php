@@ -24,4 +24,14 @@ class Company extends Model
     {
         return $this->hasMany(CompanyJob::class);
     }
+
+    public function getNameEnAttribute()
+    {
+        return $this->name['en'] ?? '';
+    }
+
+    public function getNameArAttribute()
+    {
+        return $this->name['ar'] ?? '';
+    }
 }

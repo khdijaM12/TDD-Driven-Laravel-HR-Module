@@ -34,4 +34,9 @@ class Company extends Model
     {
         return $this->name['ar'] ?? '';
     }
+
+    public function users()
+    {
+        return $this->hasMany(CompanyUser::class);
+    }
 }

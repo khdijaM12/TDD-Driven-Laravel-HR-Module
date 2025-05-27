@@ -71,7 +71,7 @@ class CompanyHolidayResource extends Resource
         return $table
             ->columns([
             TextColumn::make('id')->sortable(),
-            TextColumn::make('company.name_en')->label('Company')->searchable(),
+            TextColumn::make('company.name_en')->label('Company'),
             TextColumn::make('branch.name_en')->label('Branch')->searchable(),
             TextColumn::make('occasion')->searchable(),
             TextColumn::make('date_from')->label('From')->date(),

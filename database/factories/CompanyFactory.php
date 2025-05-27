@@ -17,8 +17,10 @@ class CompanyFactory extends Factory
     public function definition()
 {
     return [
-        'name_en' => $this->faker->unique()->company,
-        'name_ar' => 'شركة اختبار',
+         'name' => [
+            'en' => $this->faker->unique()->company,
+            'ar' => 'شركة ' . $this->faker->unique()->company,
+        ],
         'logo' => null,
         'website' => $this->faker->url,
         'status' => $this->faker->randomElement(['active', 'inactive']),

@@ -10,7 +10,7 @@ uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 test('fillable properties', function () {
     $company = new Company();
 
-    $expected = ['name_en', 'name_ar', 'logo', 'website', 'status'];
+    $expected = ['name', 'logo', 'website', 'status'];
 
     expect($company->getFillable())->toEqual($expected);
 });

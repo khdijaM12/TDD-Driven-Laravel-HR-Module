@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use App\Models\Company;
+use Filament\Facades\Filament;
+use Filament\Forms\Components\Hidden;
 
 class CompanyJobResource extends Resource
 {
@@ -31,12 +33,15 @@ class CompanyJobResource extends Resource
             ->schema([
                 Select::make('company_id')
                     ->label('Company')
-                    ->options(
-                        Company::all()->pluck('name_en', 'id')->toArray()
-                    )
-                    ->searchable()
-                    ->required(),
+                    ->required()
+                    ->options(fn () => static::getCompanyOptions())
+                    ->default(fn () => static::getDefaultCompanyId())
+                    ->disabled(fn () => static::isCompanyFieldDisabled())
+                    ->searchable(),
 
+                Hidden::make('company_id')
+                    ->default(fn () => static::isCompanyAuth() ? auth('company')->user()->company_id : null)
+                    ->dehydrated(fn () => static::isCompanyAuth()),
 
                 TextInput::make('name_en')
                     ->label('Job Title (EN)')
@@ -94,5 +99,35 @@ class CompanyJobResource extends Resource
             'create' => Pages\CreateCompanyJob::route('/create'),
             'edit' => Pages\EditCompanyJob::route('/{record}/edit'),
         ];
+    }
+
+    private static function getCompanyOptions(): array
+    {
+        if (Filament::getCurrentPanel()->getId() === 'company') {
+            return Company::where('id', auth('company')->user()->company_id)
+                ->get()
+                ->mapWithKeys(fn($company) => [$company->id => $company->name_en])
+                ->toArray();
+        }
+        return Company::all()
+            ->mapWithKeys(fn($company) => [$company->id => $company->name_en])
+            ->toArray();
+    }
+
+    private static function getDefaultCompanyId(): ?int
+    {
+        return Filament::getCurrentPanel()->getId() === 'company'
+            ? auth('company')->user()->company_id
+            : null;
+    }
+
+    private static function isCompanyFieldDisabled(): bool
+    {
+        return Filament::getCurrentPanel()->getId() === 'company';
+    }
+
+    private static function isCompanyAuth(): bool
+    {
+        return auth()->guard('company')->check();
     }
 }

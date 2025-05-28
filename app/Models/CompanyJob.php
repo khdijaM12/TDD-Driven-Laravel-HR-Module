@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Filament\Facades\Filament;
 
 class CompanyJob extends Model
 {
@@ -18,5 +19,23 @@ class CompanyJob extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    protected static function booted()
+    {
+        if (Filament::getCurrentPanel()?->getId() === 'company') {
+            static::addGlobalScope('company', function ($query) {
+                $query->where('company_id', auth('company')->user()->company_id);
+            });
+        }
+    }
+
+    public static function getOptionsByCompanyId(?int $companyId)
+    {
+        if (!$companyId) {
+            return collect(); 
+        }
+
+        return self::where('company_id', $companyId)->pluck('name_en', 'id');
     }
 }

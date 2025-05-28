@@ -31,6 +31,7 @@ class CompanyPanelProvider extends PanelProvider
             ->resources([
                 \App\Filament\Resources\CompanyBranchResource::class,
                 \App\Filament\Resources\CompanyDepartmentResource::class,
+                \App\Filament\Resources\CompanyJobResource::class,
             ])
             ->colors([
                 'primary' => Color::Amber,

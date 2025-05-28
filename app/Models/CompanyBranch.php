@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use Filament\Facades\Filament;
 class CompanyBranch extends Model
 {
     use HasFactory;
@@ -32,5 +32,14 @@ class CompanyBranch extends Model
         }
 
         return self::where('company_id', $companyId)->pluck('name_en', 'id');
+        }
+
+        protected static function booted()
+        {
+            if (Filament::getCurrentPanel()?->getId() === 'company') {
+                static::addGlobalScope('company', function ($query) {
+                    $query->where('company_id', auth('company')->user()->company_id);
+                });
+            }
         }
 }

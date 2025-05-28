@@ -30,6 +30,7 @@ class CompanyPanelProvider extends PanelProvider
             ->authGuard('company')
             ->resources([
                 \App\Filament\Resources\CompanyBranchResource::class,
+                \App\Filament\Resources\CompanyDepartmentResource::class,
             ])
             ->colors([
                 'primary' => Color::Amber,

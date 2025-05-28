@@ -56,6 +56,7 @@ class CompanyPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                'check.company.subscription',
             ])
             ->authMiddleware([
                 Authenticate::class,

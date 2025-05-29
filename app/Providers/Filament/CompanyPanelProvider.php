@@ -33,8 +33,12 @@ class CompanyPanelProvider extends PanelProvider
                 \App\Filament\Resources\CompanyDepartmentResource::class,
                 \App\Filament\Resources\CompanyJobResource::class,
             ])
+            ->brandName('Company Panel - HR System')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#243D65',
+                'danger' => '#AAAAAA', 
+                'success' => '#243D65',
+                'secondary' => '#5280D6',
             ])
             ->discoverResources(in: app_path('Filament/Company/Resources'), for: 'App\\Filament\\Company\\Resources')
             ->discoverPages(in: app_path('Filament/Company/Pages'), for: 'App\\Filament\\Company\\Pages')

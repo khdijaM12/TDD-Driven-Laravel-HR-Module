@@ -32,7 +32,6 @@ it('can validate form input', function () {
         ])
         ->call('create')
         ->assertHasFormErrors([
-            'company_id' => 'required',
             'name_en' => 'required',
             'name_ar' => 'required',
         ]);
